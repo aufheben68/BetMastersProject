@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Εγγραφή</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+        <link rel="icon" type="image/png" href="/images/bet.jpg" />
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+        <style>
+            footer {
+            padding-top: 50px;
+            padding-bottom: 0px;
+            position:fixed;
+            bottom:0;
+        }
+        
+            
+        .modal-backdrop {
+            z-index: 1020;
+        }
+        
+    </style>
+<body style="background-image: url('images/grass.jpg'); background-repeat: no-repeat;
+    background-attachment: fixed; height: 100%; margin:0;"> 
+    <div class="container">
+        <div id="button"></div>
+        <nav class="navbar navbar-dark navbar-expand-md" id="navTop">
+        <a class="navbar-brand" href="/" style="width:20%;">
+            <img th:src="@{/images/bet.jpg}" width="50px" height="50" alt="Bet masters">Bet Masters
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse flex-column" id="navbar">
+            <ul class="navbar-nav nav w-100">
+                <li class="nav-item">
+                <a class="nav-link" href="/">Στοίχημα</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/stoixhmatikes">Στοιχηματικές</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/highlights">Highlights</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/casino">Casino</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav w-100">
+                    <li class="nav-item">
+                    <a href="/virtualSports" class="nav-link">Virtual Sports</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="/ligkes"  class="nav-link">Λίγκες</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="/fullchat"  class="nav-link">Full Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kouponi" class="nav-link">Κουπόνι</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/bettingschool" class="nav-link">Betting-School</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+            <div class="row" style="padding-right:15px; padding-left:15px;">
+                <div class="col-md-12 bg-light">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                                <h1>Εγγραφή</h1>
+                <form th:action="@{/registration}" th:object="${user}" method="post">
+
+                    <p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation error
+                    </p>
+
+                    <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+                        <label for="firstName" class="control-label">Όνομα</label> <input id="firstName" class="form-control" th:field="*{firstName}" placeholder="Όνομα"/>
+                        <p class="error-message" th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Validation error</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                        <label for="lastName" class="control-label">Επίθετο</label> <input id="lastName" class="form-control" th:field="*{lastName}" placeholder="Επίθετο"/>
+                        <p class="error-message" th:each="error : ${#fields.errors('lastName')}" th:text="${error}">Validation error</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+                        <label for="email" class="control-label">Email</label> <input id="email" class="form-control" th:field="*{email}" placeholder="Διεύθυνση ηλεκτρονικού ταχυδρομείου"/>
+                        <p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error
+                        </p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
+                        <label for="confirmEmail" class="control-label">Επιβεβαίωση
+       email</label> <input id="confirmEmail" class="form-control" th:field="*{confirmEmail}" placeholder="Επιβεβαίωση διεύθυνσης ηλεκτρονικού ταχυδρομείου"/>
+                        <p class="error-message" th:each="error : ${#fields.errors('confirmEmail')}" th:text="${error}">Validation error</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                        <label for="password" class="control-label">Κωδικός</label> <input id="password" class="form-control" type="password" th:field="*{password}" placeholder="Κωδικός"/>
+                        <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+                        <label for="confirmPassword" class="control-label">Επιβεβαίωση
+       κωδικού</label> <input id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}" placeholder="Επιβεβαίωση Κωδικού"/>
+                        <p class="error-message" th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}">Validation error</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
+                        <input id="terms" type="checkbox" th:field="*{terms}" /> <label class="control-label" for="terms">Συμφωνώ με τους 
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            όρους χρήσης
+                            </button>.
+      </label>
+                        <p class="error-message" th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation error
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Εγγραφή</button>
+                        <span>Έχετε ήδη εγγραφεί? <a href="/" th:href="@{/login}">Συνδεθείτε
+        εδώ</a></span>
+                                    </div>
+                                    <div class="col-md-3"></div>             
+                     </form>
+                    </div>
+                   </div>
+                </div>
+            </div>
+        
+        <!-------------------------------------------------------------------------------------------------------------------------------->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Όροι χρήσης – Terms of use</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <div>
+                    <h4>Πνευματικά Δικαιώματα</h4>
+                    <p>Το σύνολο του περιεχομένου αποτελεί πνευματική ιδιοκτησία του betmasters.gr και προστατεύεται από την ισχύουσα νομοθεσία περί πνευματικής ιδιοκτησίας και διατίθεται στους επισκέπτες αυστηρά για προσωπική χρήση. Οποιαδήποτε αναδημοσίευση επιτρέπεται κατόπιν (γραπτής) άδειας των διαχειριστών του betmasters.gr. Οτιδήποτε άλλο, συνιστά παραβίαση του νόμου περί πνευματικής ιδιοκτησίας και διώκεται ποινικά.</p>
+                </div>
+            <hr/>
+
+                <div>
+                    <h4>Διαφημίσεις – Εξωτερικοί σύνδεσμοι</h4>
+                    <p>Το betmasters.gr δε φέρει καμμία ευθύνη για υπηρεσίες που παρέχουνε οι πλατφόρμες που προβάλλονται, στον ιστότοπο καθώς ο χρήστης έχει άμεση και αποκλειστική επαφή με την ίδια την πλατφόρμα. Ρητά συμφωνείτε και αποδέχεστε ότι το betmasters.gr, δεν ευθύνεται άμεσα ή έμμεσα για οποιαδήποτε ζημία (υλική ή ηθική, θετική ή αποθετική) τυχόν σας προκληθεί από ή σε σχέση με τη χρήση του περιεχομένου των ως άνω δικτυακών τόπων.</p>
+                </div>
+            <hr/>
+
+                <div>
+                    <h4>Αποποίηση ευθύνης</h4>
+                    <p>Tο betmasters.gr δεν εγγυάται ότι το ίδιο ή οι servers μέσω των οποίων τα περιεχόμενά του τίθενται στη διάθεση των επισκεπτών-χρηστών, δεν περιέχουν “ιούς” ή άλλα επιζήμια συστατικά. Οποιαδήποτε ζημιά προέλθει εξ αιτίας των παραπάνω το κόστος των ενδεχόμενων διορθώσεων ή εξυπηρετήσεων, το αναλαμβάνει ο επισκέπτης-χρήστης και σε καμία περίπτωση το betmasters.gr.</p>
+                </div>
+            <hr/>    
+
+                <div>
+                    <h4>Ανήλικοι</h4>
+                    <p>Το betmasters.gr απευθύνεται μόνο σε άτομα που έχουν συμπληρώσει το 18o έτος της ηλικίας και σε όσους βάσει της εκάστοτε εθνικής νομοθεσίας έχουν συμπληρώσει το απαιτούμενο όριο ηλικίας. Στην Ελλάδα το απαιτούμενο όριο ηλικίας για τυχερά παιχνίδια στο ίντερνετ είναι τα 21 χρόνια.</p>
+                </div>
+            <hr/>    
+
+                <div>
+                    <h4>Προσωπικά Δεδομένα</h4>
+                    <p>Σας γνωστοποιούμε ότι δεν πραγματοποιείται λήψη και επεξεργασία προσωπικών δεδομένων επισκεπτών. Σας γνωστοποιούμε, τέλος, ότι τηρούνται στοιχεία για την επισκεψιμότητα του δικτυακού τόπου για στατιστικούς λόγους, που είναι ανώνυμα και δεν εξατομικεύονται ανά επισκέπτη.</p>
+                </div>
+            <hr/>    
+
+                <div>
+                    <h4>Υπεύθυνο Παιχνίδι – Εθισμός</h4>
+                    <p>Αν αντιμετωπίζετε πρόβλημα με το τζόγο, καλέστε το ΚΕΘΕΑ, στη γραμμή βοήθειας 1114.</p>
+                </div>
+            <hr/>    
+
+                <div>
+                    <h4>Αλλαγή όρων χρήσης (terms of use)</h4>
+                    <p>Διατηρούμε το δικαίωμα να αλλάζουμε τους όρους χρήσης του παρόντος δικτυακού τόπου από καιρό σε καιρό και η επίσκεψη στον δικτυακό τόπο κατόπιν μιας τέτοιας αλλαγής, θα τεκμαίρεται ως αποδοχή κάθε τέτοιας αλλαγής. Είναι δική σας ευθύνη να ελέγχεται αυτό το αρχείο τακτικά για να διαπιστώσετε αν οι όροι χρήσης έχουν μεταβληθεί. Αν δεν συμφωνείτε με κάποια από τις αλλαγές στους όρους χρήσης, μπορείτε να μην κάνετε χρήση της Υπηρεσίας.</p>
+                </div>
+            <hr/>    
+
+                <div>
+                    <h4>Αποποίηση Cookie</h4>
+                    <p>Ένα “cookie” είναι αποθηκευμένες  πληροφορίες στον υπολογιστή του χρήστη από ένα server και χρησιμοποιείται για να προσαρμόσει την υπηρεσία διαδικτύου του με κάποιο τρόπο. Η ιστοσελίδα χρησιμοποιεί cookies για την αποθήκευση πληροφοριών που μπορεί να χρειάζονται για να εκτελεστούν κάποιες λειτουργίες. Οι επισκέπτες μπορούν να επιλέξουν να μην δεχθούν τα cookies.
+
+                        Χρησιμοποιούμε τα cookies για να προσωποποιήσουμε περιεχόμενο και διαφημίσεις. Επίσης, μοιραζόμαστε πληροφορίες για την χρήση σας στην ιστοσελίδα μας με τα κοινωνικά μας δίκτυα και τους συνεργάτες μας που ασχολούνται με διαφήμιση και ανάλυση δεδομένων. Δείτε πληροφορίες.</p>
+                </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        
+        <footer class="footer">
+        <div class="row">
+            <div class="col-md-3" id="info2">
+                <img th:src="@{/images/bet.jpg}" width="80px" height="80px" class="imagefooter" alt="Bet Masters"/>
+                <ul style="list-style: none; ">
+                    <li>
+                        <a style="font-size: 15px;" class="navbar-brand" href="https://www.facebook.com/BetMasters.gr"
+                            title="Bet Masters on Facebook">
+                            <img th:src="@{/images/fb.png}" width="20" height="20" alt="Facebook">
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" class="navbar-brand" href="https://www.instagram.com/BetMasters.gr"
+                            title="Bet Masters on Instagram">
+                            <img th:src="@{/images/insta.png}" width="20" height="20" alt="Instagram">
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" class="navbar-brand" href="https://www.twitter.com/BetMasters.gr"
+                            title="Bet Masters on Twitter">
+                            <img th:src="@{/images/twi.png}" width="20" height="20" alt="Twitter">
+                            Twitter
+                        </a>
+                    </li>
+                </ul>
+
+                <hr />
+                <h5 class="ypeyth">Υπεύθυνο παιχνίδι</h5>
+                <p class="ypeythkeimeno">Στους BetMasters υποστηρίζουμε τον υπεύθυνο
+                    στοιχηματισμό και συστήνουμε να παίζετε τυχερά παιχνίδια με μέτρο. Eπισκεφτείτε το
+                    www.kethea-alfa.gr για συμβουλές και υποστήριξη. ΚΕΘΕΑ ΑΛΦΑ τηλ 1114.
+                </p>
+            </div>
+
+            <div class="col-md-9" style="margin-top:20px;">
+                <p style="padding-left:35px">Οι Bet Masters βρίσκονται κοντά σας με καθημερινές αναλύσεις αγώνων,<br> προγνωστικά στοιχήματος και
+                    ενημέρωση για τις στοιχηματικές και τα καζίνο.</p>
+                    <br/>
+                    <br/>
+                <div class="row">   
+                    <div class="col-md-3 bulletsfooter">
+                        <h5 class="nav-link" >Στοιχηματικές</h5>
+                        <hr style="padding-right:0px; margin-left:30px;"/>
+                        <h6><a href="https://www.stoiximan.gr/">Stoiximan</a></h6>
+                        <h6><a href="https://www.foxbet.gr/">Foxbet</a></h6>
+                        <h6><a href="https://www.betshop.gr/">Betshop</a></h6>
+                        <h6><a href="https://www.bet365.gr/">Bet365</a></h6>
+                        <h6><a href="https://www.novibet.gr/">Novibet</a></h6>
+                    </div>
+    
+                    <div class="col-md-3 bulletsfooter">
+                        <h5 class="nav-link">Βαθμολογίες</h5>
+                        <hr style="padding-right:0px; margin-left:30px;"/>
+                        <h6><a href="/ligkes#bundesliga">Bundesliga</a></h6>
+                        <h6><a href="/ligkes#franceLeague">F.Ligue</a></h6>
+                        <h6><a href="/ligkes#seriaA">Seria A</a></h6>
+                        <h6><a href="/ligkes#premierLeague">P.League</a></h6>
+                        <h6><a href="/ligkes#primeraDivision">La Liga</a></h6>
+                    </div>
+                    
+                    <div class="col-md-3 bulletsfooter">
+                        <h5 class="nav-link">Καζίνο</h5>
+                        <hr style="padding-right:0px; margin-left:30px;"/>
+                        <h6><a href="https://www.stoiximan.gr/casino">Stoiximan </a></h6>
+                        <h6><a href="https://live.netbet.gr/">NetBet </a></h6>
+                        <h6><a href="https://casino.bwin.gr/el/games">BWin </a></h6>
+                        <h6><a href="https://www.gowild.com/">GoWild </a></h6>
+                        <h6><a href="https://www.21casino.com/en">21 </a></h6>
+                        
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <hr style="width: 100%;" />
+
+        <p id="info" style="align-content: center; align-items: center; text-align: center; padding-bottom: 16px;"><a href="/termAndConditions">Bet Masters © 2020 - Όροι χρήσης |</a>
+            <span>
+                <a href="/cookiePolicy">Πολιτική χρήσης cookies |</a>
+            </span>
+            <a href="/contactUs">Επικοινωνία</a>
+            <a href="http://www.kethea-alfa.gr/">
+                <img th:src="@{/images/kethea2.jpg}" alt="Kethea">
+            </a>
+        </p>
+
+        </footer>
+
+
+    </div>
+    <script>
+                var btn = $('#button');
+
+                $(window).scroll(function() {
+                  if ($(window).scrollTop() > 50) {
+                    btn.addClass('show');
+                  } else {
+                    btn.removeClass('show');
+                  }
+                });
+
+                btn.on('click', function(e) {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+
+                $(document).ready(function() {
+                        $("#navbar").click(function(e) {
+                            var isActive = $(this).hasClass('.nav-link active');
+                            $('.nav-link').removeClass('active');
+                            if (!isActive) {
+                            $(this).addClass('active');
+                            }
+                        });
+                 });
+     </script>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
+

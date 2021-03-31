@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Bet Master</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+        <link rel="icon" type="image/png" href="/images/bet.jpg" />
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body style="background-image: url('images/grass.jpg'); background-repeat: no-repeat;
+    background-attachment: fixed;">
+    <div class="container">
+        <div id="button"></div>
+        <nav class="navbar navbar-dark navbar-expand-md" id="navTop">
+        <a href="/" class="navbar-brand" style="width:20%;">
+            <img th:src="@{/images/bet.jpg}" width="50px" height="50" alt="Bet masters">Bet Masters
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse flex-column" id="navbar">
+            <ul class="navbar-nav nav w-100">
+                <li class="nav-item">
+                <a class="nav-link" href="/">Στοίχημα</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link"  href="/stoixhmatikes">Στοιχηματικές</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link"  href="/highlights">Highlights</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/casino">Casino</a>
+                </li>
+                <form class="form-inline ml-md-auto order-first order-md-last">
+                    <li class="nav-item">
+                        <li sec:authorize="isAnonymous()">
+                            <a href="/registration" id="register" title="Εγγραφή" style="text-decoration: none; color:white;">
+                                <img th:src="@{/images/register.png}" width="35" height="35" alt="register">Εγγραφή
+                            </a>
+                        </li>
+                    </li>
+                    <li class="nav-item">
+                        <li sec:authorize="isAnonymous()">
+                            <a href="/login" id="login" title="Σύνδεση" style="text-decoration: none; color:white;">
+                                <img th:src="@{/images/login.png}" width="33" height="33" alt="register">Σύνδεση
+                            </a>
+                        </li>    
+                    </li>
+                    <li class="nav-item">
+                        <li sec:authorize="isAuthenticated()">
+                                <span style="text-decoration:none; color:white;" sec:authorize="isAuthenticated()">
+                                    Welcome, <span sec:authorize="hasRole('ROLE_ADMIN')">(admin) </span><span id="name" sec:authentication="principal.lastName">
+                                    </span> 
+                        </li>    
+                    </li>
+                    <li class="nav-item">
+                        <li sec:authorize="isAuthenticated()">
+                                <a class="nav-link" th:href="@{/logout}"><span style="color:rgb(196, 18, 78);">Logout</a></span>
+                        </li>    
+                    </li>
+                </form>
+            </ul>
+            <ul class="navbar-nav nav w-100">
+                <li class="nav-item">
+                <a href="/virtualSports" class="nav-link">Virtual-Sports</a>
+                </li>
+                <li class="nav-item">
+                <a href="/ligkes"  class="nav-link">Λίγκες</a>
+                </li>
+                <li class="nav-item">
+                <a href="/fullchat"  class="nav-link active">Full Chat</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kouponi" class="nav-link">Κουπόνι</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/bettingschool"  class="nav-link">Betting-School</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+  <div class="row mx-md-6 no-gutters">
+    <div class="col-md-3">
+        <div class="p-3 bg-light" style="min-height:100%;">
+        <div class="p-3 border bg-light" sec:authorize="isAuthenticated()">
+                <button class="btn btn-warning" sec:authorize="!hasRole('ROLE_PREMIUM_USER') and !hasRole('ROLE_ADMIN')"><a href="/buy" style="text-decoration:none; color:black;">Γίνε PREMIUM χρήστης!</a></button>
+        </div> 
+      <div class="p-3 border bg-light"><h6 class="leftcolumn">Ιστοσελίδες στοιχήματος</h6>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner7_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:black">Betshop</b> <br/> <a href="https://www.betshop.gr/?myaff=tF99y3WPsLxJyMXVu5hDk2Nd7ZgqdRLk___5#/" style="color: black">Παίξε νόμιμα στη Betshop</a> </p>
+                </div>
+            </div>  
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner10_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Bet365</b> <br/> <a href="https://www.bet365.gr/?affiliate=365_893279#/HO/" style="color:white">Οι καλύτερες αποδόσεις</a> </p>
+                </div>
+            </div> 
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner11_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Winmasters</b> <br/> <a href="https://www.winmasters.gr/gr/prosfores/athlimata/stoiximatiko-bonus-katathesis/" style="color:white">Ασφαλές παιχνίδι</a> </p>
+                </div>
+            </div> 
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner12_1.jpg}"  alt="">
+                    <p class="absolute-text"><b style="color:white">Betrebels</b> <br/> <a href="https://www.betrebels.gr/el/" style="color:white">Προσφορές <br/> για όλους</a> </p>
+                </div>
+            </div> 
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner13_1.jpg}"  alt="">
+                    <p class="absolute-text"><b style="color: black">Vistabet</b> <br/> <a href="https://sports.vistabet.gr/el/sports" style="color: black">Παίξε νόμιμα στη Vistabet</a> </p>
+                </div>
+            </div> 
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner14_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Championsbet</b> <br/> <a href="https://www.championsbet.gr/sportsbook/" style="color:white">Απίστευτες αποδόσεις</a> </p>
+                </div>
+            </div>  
+        </div>
+       </div> 
+    </div> 
+    <div class="col-md-6">
+        <div class="p-3 bg-light" style="min-height:100%;">
+        <div class="p-3 border bg-light">
+            <div id="notLogged" sec:authorize="isAnonymous()">
+                     <h6 class="leftcolumn">Παρακαλώ συνδεθείτε ή εγγραφείτε για να συμμετέχετε στο Chat</h6>
+                     <h6 sec:authorize="isAnonymous()"><a class="nav-link" href="/registration">Εγγραφή</a></h6>
+                    <h6 sec:authorize="isAnonymous()"><a class="nav-link" href="/login">Σύνδεση</a></h6>
+            </div>
+            <div id="chat-page" class="hidden" sec:authorize="isAuthenticated()">
+            <div hidden id="name" th:text ="${#authentication.getPrincipal().getLastName()}"></div>
+            <div class="chat-container" >
+                                <div style="height:50px" class="chat-header">
+                                    <h5 id="chath5">Betmasters Chat </h5>
+                                </div>
+                                <div class="connecting">Connecting...</div>
+                                <ul style="height:275px;   padding: 3px; " id="messageArea">
+
+                                </ul >
+                                <form  style="padding:0px;"id="messageForm" name="messageForm" nameForm="messageForm">
+                                    <div style="margin-bottom: 0px;"class="form-group">
+                                        <div class="input-group clearfix">
+                                            <div style="margin:0; width:100%;"class="form-group">
+                                            <input  style="width: 100%;" type="text" id="message" placeholder="Type a message..."
+                                                   autocomplete="off" class="form-control" />
+                                            </div>
+                                            
+                                        </div>
+                                        <div style="margin:0;" class="form-group">
+                                            <button style="width:100%;"type="submit" class="primary">Send</button>
+                                            </div>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+        <div class="p-3 border bg-light" style="min-height: 100%">
+         <div class="p-3 border bg-light"><h6 class="leftcolumn">Ιστοσελίδες στοιχήματος</h6>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner1_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Stoiximan</b> <br/> <a href="https://www.stoiximan.gr/" style="color:white">Με iOS & Android</a> </p>
+                </div>
+            </div>
+            <br />
+
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner2_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Bwin</b> <br/> <a href="https://sports.bwin.gr/el/sports" style="color:white">Παίξε νόμιμα 21+</a> </p>
+                </div>
+            </div>
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner4_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Novibet</b> <br/> <a href="https://www.novibet.gr/en/" style="color:white">100% δίπλα στον παίκτη</a> </p>
+                </div>
+            </div>
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner3_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Netbet</b> <br/> <a href="https://www.netbet.gr/" style="color:white">Παίξε νόμιμα στη Netbet</a> </p>
+                </div>
+            </div>
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner5_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:black">Interwetten</b> <br/> <a href="https://bit.ly/3bL6snA" style="color:black">Ασφαλείς πληρωμές</a> </p>
+                </div>
+            </div>
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner6_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Pamestoixima</b> <br/> <a href="https://www.pamestoixima.gr/home" style="color:white">Το παιχνίδι ξαναρχίζει</a> </p>
+                </div>
+            </div>
+
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner9_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Sportingbet</b> <br/> <a href="https://sports.sportingbet.gr/el/sports?wm=4900459" style="color:white">Παίξε στη Sportingbet</a> </p>
+                </div>
+            </div>
+            <br/>
+            <div style="overflow:hidden;">
+                <div class="relative">
+                    <img th:src="@{/images/banner8_1.jpg}" alt="">
+                    <p class="absolute-text"><b style="color:white">Goalbet</b> <br/> <a href="https://www.goalbet.gr/index2.php?" style="color:white">Προγράμματα ανταμοιβών</a> </p>
+                </div>
+            </div>
+        </div>
+        <div class="p-3 border bg-light arthra"><h6 class="leftcolumn">Ιστοσελίδες στοιχήματος</h6><hr/>
+                <div>  
+                  <a href="/gkaniota">
+                      <img th:src="@{/images/ganiota.jpg}" alt="" style="width:40px; height:40px;">
+                    Τι είναι η γκανιότα
+                </a> </div>
+                <hr/>
+                <div><a href="/handicap">
+                        <img th:src="@{/images/handicap.jpg}" alt="" style="width:40px; height:40px;">
+                    Πώς παίζεται το Ασιατικό Χάντικαπ (Asian Handicap)
+                </a> </div>
+                <hr/>
+                <div><a href="/tziroi">
+                        <img th:src="@{/images/betfair.jpg}" alt="" style="width:40px; height:40px;">
+                    Τι σημαίνουν οι τζίροι Betfair στο στοίχημα
+                </a> </div>
+                <hr/>
+                <div><a href="/ptwshApodosewn">
+                        <img th:src="@{/images/ptwshapodosewn.jpg}" alt="" style="width:40px; height:40px;">
+                    Πώς διαβάζεται η πτώση αποδόσεων στο στοίχημα
+                </a> </div>
+                <hr/>
+                <div><a href="/oriaBook">
+                        <img th:src="@{/images/oriabook.png}" alt="" style="width:40px; height:40px;">
+                    Τα όρια των book και πώς να τα αποφεύγετε
+                </a> </div>
+        </div>
+      </div>
+     </div>
+    </div> 
+        
+        <footer class="footer">
+        <div class="row">
+            <div class="col-md-3" id="info2">
+                <img th:src="@{/images/bet.jpg}" width="80px" height="80px" class="imagefooter" alt="Bet Masters"/>
+                <ul style="list-style: none; ">
+                    <li>
+                        <a style="font-size: 15px;" class="navbar-brand" href="https://www.facebook.com/BetMasters.gr"
+                            title="Bet Masters on Facebook">
+                            <img th:src="@{/images/fb.png}" width="20" height="20" alt="Facebook">
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" class="navbar-brand" href="https://www.instagram.com/BetMasters.gr"
+                            title="Bet Masters on Instagram">
+                            <img th:src="@{/images/insta.png}" width="20" height="20" alt="Instagram">
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a style="font-size: 15px;" class="navbar-brand" href="https://www.twitter.com/BetMasters.gr"
+                            title="Bet Masters on Twitter">
+                            <img th:src="@{/images/twi.png}" width="20" height="20" alt="Twitter">
+                            Twitter
+                        </a>
+                    </li>
+                </ul>
+
+                <hr />
+                <h5 class="ypeyth">Υπεύθυνο παιχνίδι</h5>
+                <p class="ypeythkeimeno">Στους BetMasters υποστηρίζουμε τον υπεύθυνο
+                    στοιχηματισμό και συστήνουμε να παίζετε τυχερά παιχνίδια με μέτρο. Eπισκεφτείτε το
+                    www.kethea-alfa.gr για συμβουλές και υποστήριξη. ΚΕΘΕΑ ΑΛΦΑ τηλ 1114.
+                </p>
+            </div>
+
+            <div class="col-md-9" style="margin-top:20px;">
+                <p style="padding-left:35px">Οι Bet Masters βρίσκονται κοντά σας με καθημερινές αναλύσεις αγώνων,<br> προγνωστικά στοιχήματος και
+                    ενημέρωση για τις στοιχηματικές και τα καζίνο.</p>
+                    <br/>
+                    <br/>
+                <div class="row">   
+                    <div class="col-md-3 bulletsfooter">
+                        <h5 class="nav-link" >Στοιχηματικές</h5>
+                        <hr style="padding-right:0px; margin-left:30px;"/>
+                        <h6><a href="https://www.stoiximan.gr/">Stoiximan</a></h6>
+                        <h6><a href="https://www.foxbet.gr/">Foxbet</a></h6>
+                        <h6><a href="https://www.betshop.gr/">Betshop</a></h6>
+                        <h6><a href="https://www.bet365.gr/">Bet365</a></h6>
+                        <h6><a href="https://www.novibet.gr/">Novibet</a></h6>
+                    </div>
+    
+                    <div class="col-md-3 bulletsfooter">
+                        <h5 class="nav-link">Βαθμολογίες</h5>
+                        <hr style="padding-right:0px; margin-left:30px;"/>
+                        <h6><a href="/ligkes#bundesliga">Bundesliga</a></h6>
+                        <h6><a href="/ligkes#franceLeague">F.Ligue</a></h6>
+                        <h6><a href="/ligkes#seriaA">Seria A</a></h6>
+                        <h6><a href="/ligkes#premierLeague">P.League</a></h6>
+                        <h6><a href="/ligkes#primeraDivision">La Liga</a></h6>
+                    </div>
+                    
+                    <div class="col-md-3 bulletsfooter">
+                        <h5 class="nav-link">Καζίνο</h5>
+                        <hr style="padding-right:0px; margin-left:30px;"/>
+                        <h6><a href="https://www.stoiximan.gr/casino">Stoiximan </a></h6>
+                        <h6><a href="https://live.netbet.gr/">NetBet </a></h6>
+                        <h6><a href="https://casino.bwin.gr/el/games">BWin </a></h6>
+                        <h6><a href="https://www.gowild.com/">GoWild </a></h6>
+                        <h6><a href="https://www.21casino.com/en">21 </a></h6>
+                        
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+        <hr style="width: 100%;" />
+
+        <p id="info" style="align-content: center; align-items: center; text-align: center; padding-bottom: 16px;"><a href="/termAndConditions">Bet Masters © 2020 - Όροι χρήσης |</a>
+            <span>
+                <a href="/cookiePolicy">Πολιτική χρήσης cookies |</a>
+            </span>
+            <a href="/contactUs">Επικοινωνία</a>
+            <a href="http://www.kethea-alfa.gr/">
+                <img th:src="@{/images/kethea2.jpg}" alt="Kethea">
+            </a>
+        </p>
+
+    </footer>
+    </div>
+    <script>
+                var btn = $('#button');
+
+                $(window).scroll(function() {
+                  if ($(window).scrollTop() > 400) {
+                    btn.addClass('show');
+                  } else {
+                    btn.removeClass('show');
+                  }
+                });
+
+                btn.on('click', function(e) {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+
+                $(document).ready(function() {
+                        $("#navbar").click(function(e) {
+                            var isActive = $(this).hasClass('.nav-link active');
+                            $('.nav-link').removeClass('active');
+                            if (!isActive) {
+                            $(this).addClass('active');
+                            }
+                        });
+                 });
+     </script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> 
+   <script src="/js/main.js"></script>
+</body>
+
+</html>
