@@ -1,0 +1,320 @@
+    .arthra a{
+        text-decoration:none;
+        color: black;
+    }
+    
+    .arthra a:hover{
+        color:rgb(196, 18, 78);
+    }
+    
+  .navbar-dark {
+    background: linear-gradient(to left, rgba(1, 4, 12, 0.767), rgba(4, 18, 31, 0.97), rgba(3, 15, 26, 0.97), rgba(0, 5, 17, 0.97));
+   }
+
+  .navbar-brand {
+    width: 20%;
+    padding-left:20px;
+    text-decoration: none;
+    color: rgb(194, 193, 193);
+    font-size: 25px;
+  }
+
+  .nav-item {
+    font-family:'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+    padding: 0 .4rem;
+  }
+
+  .navbar-dark .navbar-nav .nav-item .nav-link:hover{
+      color: rgb(196,18,78);
+  }
+  
+  .navbar .navbar-nav .nav-link {
+    transition: all .05s ease-in-out;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link.active {
+    border-bottom: 1px solid rgb(196,18,78);
+  }
+  
+  .navbar-dark .navbar-nav .nav-link:hover {
+    border-bottom: 1px solid rgb(196,18,78);
+  }
+  
+  .navbar-toggler:hover {
+    cursor: pointer;
+  }
+
+  #register :hover{
+      color: rgb(196,18,78);
+  }
+
+
+  /* footer style */
+
+  .footer {
+    position: relative;
+    margin: 0px;
+    left: 0;
+    bottom: 0;
+    margin-bottom: -20px;
+    width: 100%; 
+    background: linear-gradient(to left, rgba(1, 4, 12, 0.767), rgba(4, 18, 31, 0.97), rgba(3, 15, 26, 0.97), rgba(0, 5, 17, 0.97));
+    color: white; 
+}
+
+
+    #ulMedia li {
+        display: inline;
+    }
+
+
+    hr {
+        display: block;
+        height: 1px;
+        width: 100%;
+        border: 0;
+        border-top: 1px solid rgb(121, 111, 111);
+        margin: 1em 0;
+        padding: 0;
+    }
+
+
+    .ypeyth {
+        color: rgb(185, 183, 183);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-left: 40px;
+    }
+
+
+    .ypeythkeimeno {
+        font-size: 14px;
+        margin-left: 40px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+
+    #info a {
+        color: rgb(196, 18, 78);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+
+    #info :hover {
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+
+
+    #info2 a:hover{
+      color: rgb(196, 18, 78);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    }
+
+    .bulletsfooter h5{
+        padding-left: 35px;
+    }
+
+    .bulletsfooter h6 a {
+        color: white;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 16px;
+        align-items: left;
+        padding-left: 35px;
+    }
+
+
+    .bulletsfooter h6 a:hover {
+        color: rgb(196, 18, 78);
+        text-decoration: none;
+    }
+
+
+    .imagefooter {
+        margin-top: 20px;
+        margin-left: 40px;
+        margin-bottom: 10px;
+    }
+
+    /*MAIN CONTENT CSS */
+
+
+    .relative {
+        position: relative;
+        width: 200px;
+    }
+
+    .absolute-text {
+        position: absolute;
+        bottom: 0;
+        font-size: 15px;
+        font-family: "Segoe UI Light";
+        color: white;
+        padding: 4px 46px;
+        width: 100%;
+        text-align: left;
+        left: 50px;
+        right: 0;
+    }
+
+
+    /* BUTTON CSS */
+    #button {
+        display: inline-block;
+        background-color: rgb(196, 18, 78);
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        border-radius: 4px;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        transition: background-color .3s, 
+          opacity .5s, visibility .5s;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+      #button::after {
+        content: "\f077";
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 2em;
+        line-height: 50px;
+        color: #fff;
+      }
+      #button:hover {
+        cursor: pointer;
+        background-color: #333;
+      }
+      #button:active {
+        background-color: #555;
+      }
+      #button.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      @media (min-width: 500px) {
+        #button {
+          margin: 30px;
+        }
+      }
+
+     
+      /********************************************** SLOT CSS ********************************************************************/
+
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+    main{
+        border-radius: 5px;
+        background-color: #EF5350;
+        margin-top: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
+        /* margin-left: calc((100% - 580px) / 2); */
+        width: 450px;
+    }
+    section#status{
+        /* margin-bottom: 25px; */
+        padding-top: 25px;
+        padding-left:25px;
+        padding-bottom: 25px;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #37474F;
+        color: #FFFFFF;
+        font-size: 25px;
+        font-family: 'Roboto Mono', monospace;
+    }
+    section#Slots{
+        border-radius: 15px;
+        background-color: #FAFAFA;
+    }
+    section#Gira{
+        margin-top: 25px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #AB47BC;
+        color: #FFFFFF;
+        font-size: 25px;
+    }
+    section#Gira:hover{
+        background-color: #BA68C8;
+    }
+    section#options{
+        margin-top: 20px;
+        padding-top: 5px;
+        border-radius: 5px;
+        background-color: #C62828;
+        color: #FFFFFF;
+    }
+    .option{
+        padding-left: 5px;
+    }
+    section#info{
+        background-color: #616161;
+        padding-left: 12px;
+        padding-bottom: 12px;
+        border-radius: 5px;
+        overflow: hidden;
+        animation-duration: 1s;
+        color: #BDBDBD;
+        margin-top: 50px;
+        margin-left: 30%;
+        margin-right: 30%;
+        display: none;
+    }
+    #slot1, #slot2, #slot3{
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 25px;
+/*        margin-right: 15px;*/
+        background-size: 100px;
+        width: 100px;
+        height: 100px;
+    }
+
+    
+    .rightcolumn{
+        color: rgb(196, 18, 78);
+        margin-left: 12px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    
+    .leftcolumn{
+        color: rgb(196, 18, 78);
+        margin-left: 12px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        width: auto\9; /* ie8 */
+    }
+    
+    .carouzel a{
+        radius :15px;
+        background-color: grey;
+        opacity: 100%;
+        color: white;
+    }
+
+    .carouzel a:hover{
+        background-color: black;
+        text-decoration: none;
+        opacity: 100%;
+        color:white;
+    }
+
